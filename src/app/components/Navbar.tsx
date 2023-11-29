@@ -1,34 +1,35 @@
 'use client'
 import React from 'react';
 import Link from "next/link";
+import {NAVBAR_ITEMS} from '@/app/data/menu';
+import {MenuItem, MenuSection} from '@/app/types/menu';
+
 
 const Navbar = () => {
     return (
-        <nav>
-            <div>
-                <ul>
-                    <h1>Get Started</h1>
-                    <li><Link href='/'>시작하기</Link></li>
-                </ul>
-                <ul>
-                    <h1>User Manual</h1>
-                    <li><Link href='/'>로그인/회원가입</Link></li>
-                    <li><Link href='/'>메인 대시보드</Link></li>
-                    <li><Link href='/'>메뉴 페이지</Link></li>
-                    <li><Link href='/'>식권 결제 페이지</Link></li>
-                    <li><Link href='/'>식권 사용 페이지</Link></li>
-                    <li><Link href='/'>공지사항</Link></li>
-                </ul>
-                <ul>
-                    <h1>Admin Manual</h1>
-                    <li><Link href='/'>로그인/회원가입</Link></li>
-                    <li><Link href='/'>어드민 대시보드</Link></li>
-                    <li><Link href='/'>공지사항 관리</Link></li>
-                    <li><Link href='/'>주문 내역 관리</Link></li>
-                    <li><Link href='/'>QR Code 스캐너</Link></li>
-                    <li><Link href='/'>공지사항</Link></li>
-                </ul>
-            </div>
+        <nav className='w-[300px]'>
+            {NAVBAR_ITEMS.map((section: MenuSection) => (
+                <div
+                    key={section.title}
+                    className='p-5'
+                >
+                    <h1 className='px-5 text-xl font-bold'>
+                        {section.title}
+                    </h1>
+                    <ul className='mt-1.5'>
+                        {section.items.map((item: MenuItem) => (
+                            <li
+                                key={item.name}
+                                className='px-5 py-2'
+                            >
+                                <Link href={item.link}>
+                                    {item.name}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ))}
         </nav>
     );
 };
